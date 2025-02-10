@@ -11,9 +11,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.kotlinblank.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var clmain : ConstraintLayout
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -23,12 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+ //       clmain = findViewById(R.id.main)
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
+                .setAction("UNDO") {
+                    val snackbar =
+                        Snackbar.make(clmain, "Message is restored", Snackbar.LENGTH_LONG)
+                    snackbar.show()
+                }
                 .setAnchorView(R.id.fab).show()
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
